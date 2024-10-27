@@ -10,6 +10,9 @@ from langchain_community.document_loaders import WebBaseLoader
 from chains import Chain
 from portfolio import Portfolio
 from utils import clean_text
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Define the Gmail API scopes
 SCOPES = ['https://www.googleapis.com/auth/gmail.send']
@@ -170,7 +173,7 @@ def create_streamlit_app(llm, portfolio, clean_text):
                 st.error(f"Failed to send email: {e}")
 
 if __name__ == "__main__":
-    api_key = "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"
+    api_key = os.getenv("GROQ_API_KEY")
     chain = Chain(api_key)
     portfolio = Portfolio()
     create_streamlit_app(chain, portfolio, clean_text)

@@ -3,6 +3,9 @@ from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.exceptions import OutputParserException
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Chain:
     def __init__(self, api_key):
@@ -52,7 +55,7 @@ class Chain:
 
 if __name__ == "__main__":
     # Test with an API key passed directly without using environment variables
-    api_key = "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"
+    api_key = os.getenv("GROQ_API_KEY")
     print("api_key is ", api_key)
     chain = Chain(api_key)
     print(chain.llm.groq_api_key)  # To check if it's initialized correctly
